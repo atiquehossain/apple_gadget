@@ -10,6 +10,7 @@ class AccountInfoPage extends GetView<AccountController> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Account Information'),
+        centerTitle: true,
       ),
       body: Center(
         child: Obx(

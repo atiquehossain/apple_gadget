@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 
+import '../buinding/GetOpenTrades/GetOpenTrades_binding.dart';
 import '../buinding/LastFourDigit_binding.dart';
 import '../buinding/accountInfo/accountInfo_binding.dart';
 import '../buinding/home_binding.dart';
 import '../buinding/login_binding.dart';
 import '../buinding/splash_binding.dart';
 import '../controllers/LastFourDigitController.dart';
+import '../views/GetOpenTrades/GetOpenTradesView.dart';
 import '../views/LastFourDigit/LastFourDigitView.dart';
 import '../views/accountInfo/AccountInfoPage.dart';
 import '../views/authentication/LoginPageView.dart';
@@ -45,6 +47,10 @@ class AppPages {
       name: _Paths.LASTFOURDIGIT,
       page: () =>  LastFourDigitView(),
       binding: LastFourDigit_binding() ,
+    ),  GetPage(
+      name: _Paths.GETOPENTRADES,
+      page: () =>  GetOpenTradesView(),
+      binding: GetOpenTradesBinding() ,
     ),
   ];
 }

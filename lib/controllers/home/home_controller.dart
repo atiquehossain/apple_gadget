@@ -1,3 +1,4 @@
+import 'package:apple_gadget/views/GetOpenTrades/GetOpenTradesView.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -13,11 +14,15 @@ class HomeController extends GetxController {
   }
 
   accountInfoPage() {
-    Get.offAllNamed(Routes.ACCOUNTINFO);
+    Get.toNamed(Routes.ACCOUNTINFO);
   }
 
   lastFourDigitPage() {
-    Get.offAllNamed(Routes.LASTFOURDIGIT);
+    Get.toNamed(Routes.LASTFOURDIGIT);
+  }
+
+  getOpenTradesPage() {
+    Get.toNamed(Routes.GETOPENTRADES);
   }
 
 

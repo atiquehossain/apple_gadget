@@ -29,12 +29,10 @@ class HomeView extends GetView<HomeController> {
             buildButton("Get Last Four Numbers Phone", () {
               controller.lastFourDigitPage();
             }),
-            buildButton("Get Open Trades", () {
-              // Implement action for GetOpenTrades
+            buildButton("Get Open Trades & User Profit", () {
+              controller.getOpenTradesPage();
             }),
-            buildButton("User Profit", () {
-              // Implement action for User Profit
-            }),
+
           ],
         ),
       ),

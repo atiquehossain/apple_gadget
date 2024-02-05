@@ -8,6 +8,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const ACCOUNTINFO = _Paths.ACCOUNTINFO;
   static const LASTFOURDIGIT = _Paths.LASTFOURDIGIT;
+  static const GETOPENTRADES = _Paths.GETOPENTRADES;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
     static const LOGIN = '/login';
     static const ACCOUNTINFO = '/accountInfo';
     static const LASTFOURDIGIT = '/lastFourDigit';
+    static const GETOPENTRADES = '/getOpenTrades';
 }
