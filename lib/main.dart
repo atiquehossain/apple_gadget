@@ -8,17 +8,13 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'controllers/theme/ThemesController.dart';
-import 'controllers/global_controller.dart';
-import 'controllers/login_controller.dart';
 
-void main() async{
-  Global.init();
+void main() async {
   await GetStorage.init();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   MyApp({super.key});
 
   final ThemesController themeController = Get.put(ThemesController());

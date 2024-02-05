@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controllers/splash_controller.dart';
+import '../../controllers/splash_controller.dart';
 
 
 

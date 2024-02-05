@@ -14,51 +14,51 @@ class LoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  var email = ''.obs;
-  var password = ''.obs;
   var isLoading = false.obs;
   var error = ''.obs;
 
   var base_url = ApiConstants.baseUrl;
-  var isPasswordVisible = true.obs;
-
   var endpoint = "IsAccountCredentialsCorrect";
   final getStorage = GetStorage();
-
 
   @override
   void onInit() {
     super.onInit();
-
-
   }
-
 
   Future<void> isAccountCredentialsCorrect() async {
     try {
-      final response = await _client.post(base_url + endpoint, {
-        "login": emailController.text.toString(),
-        "password": passwordController.text.toString()
-      });
+      isLoading.value = true;
+
+
+      final response = await _client.post(
+        base_url + endpoint,
+        {
+          "login": emailController.text.toString(),
+          "password": passwordController.text.toString()
+        },
+      );
 
       if (response.statusCode == 200) {
-        print(response.body);
-        CommonWidgets.showSuccessToast('Success', 'Login successful');
 
+        CommonWidgets.showSuccessToast('Success', 'Login successful');
         getStorage.write("storedLoginStatus", 1);
         getStorage.write("login", emailController.text.toString());
         getStorage.write('requiresAuthToken', response.body['token']);
+        await Future.delayed(Duration(seconds: 2));
         Get.offAllNamed(Routes.HOME);
       } else {
+
         print(response.statusCode.toString());
         error.value = 'Invalid credential';
         CommonWidgets.snackBar('error', 'Invalid credential');
       }
-      isLoading.value = false;
     } catch (e) {
+
       error.value = 'Failed to connect to server';
       print(error.value.toString());
       CommonWidgets.snackBar('error', 'Failed to connect to the server');
+    } finally {
       isLoading.value = false;
     }
   }

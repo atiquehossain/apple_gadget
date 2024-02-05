@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
+import '../../controllers/login/login_controller.dart';
 
 
 

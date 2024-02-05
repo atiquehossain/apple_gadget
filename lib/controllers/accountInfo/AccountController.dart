@@ -15,33 +15,25 @@ class AccountController extends GetxController {
   var endpoint = "GetAccountInformation";
   var error = ''.obs;
 
-
-
-
   final getStorage = GetStorage();
 
-  int? loginAsInt;
+  var loginAsInt;
   String? requiresAuthToken;
 
   void onInit() {
     super.onInit();
-    //loginAsInt = getStorage.read('login');
     requiresAuthToken = getStorage.read('requiresAuthToken');
-   // loginAsInt = getStorage.read('login');
-
-
+    loginAsInt = getStorage.read('login');
 
     fetchAccountInformation();
   }
 
   Future<void> fetchAccountInformation() async {
-    final requestBody = '{"login": 2088888, "token": "${requiresAuthToken}"}';
+    final requestBody =
+        '{"login": ${loginAsInt}, "token": "${requiresAuthToken}"}';
 
     try {
-
-
-      final response = await _client.post(
-        base_url+endpoint,  requestBody);
+      final response = await _client.post(base_url + endpoint, requestBody);
 
       print("Response StatusCode: ${response.statusCode}");
       print("Response Body: ${response.body}");
@@ -58,8 +50,4 @@ class AccountController extends GetxController {
       print("Exception: $e");
     }
   }
-
-
 }
-
-

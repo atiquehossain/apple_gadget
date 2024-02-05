@@ -12,7 +12,7 @@ class GetOpenTradesController extends GetxController {
 
   final getStorage = GetStorage();
 
-  int? loginAsInt;
+  var loginAsInt;
   String? requiresAuthToken;
 
   var totalProfit = RxDouble(0.0);
@@ -21,11 +21,13 @@ class GetOpenTradesController extends GetxController {
   void onInit() {
     super.onInit();
     requiresAuthToken = getStorage.read('requiresAuthToken');
+    loginAsInt = getStorage.read('login');
+
     fetchgetOpenTradesInformation();
   }
 
   Future<void> fetchgetOpenTradesInformation() async {
-    final requestBody = '{"login": 2088888, "token": "${requiresAuthToken}"}';
+    final requestBody = '{"login": ${loginAsInt}, "token": "${requiresAuthToken}"}';
 
     try {
       final response = await _client.post(base_url + endpoint, requestBody);
@@ -35,7 +37,7 @@ class GetOpenTradesController extends GetxController {
 
       if (response.statusCode == 200) {
         getOpenTradesInfo.value = response.body;
-        calculateTotalProfit(); // Calculate total profit after updating data
+        calculateTotalProfit();
         print("Response Body: ${response.body}");
       } else {
         throw Exception("Failed to load getOpenTrades information");

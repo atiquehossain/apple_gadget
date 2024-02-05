@@ -59,7 +59,6 @@ class HomeView extends GetView<HomeController> {
           style: TextStyle(fontSize: 18),
         ),
         style: ElevatedButton.styleFrom(
-        //  primary: Colors.blue, // Change the color as per your design
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         ),
       ),

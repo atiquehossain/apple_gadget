@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/login_controller.dart';
+import '../../controllers/login/login_controller.dart';
 
 class LoginPageView extends GetView<LoginController> {
-  const LoginPageView({super.key});
+  const LoginPageView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +19,15 @@ class LoginPageView extends GetView<LoginController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: screenWidth * 0.1),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Log In",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ],
+                Text(
+                  "Log In",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                  ),
                 ),
+
                 SizedBox(height: screenWidth * 0.1),
                 SizedBox(
                   width: screenWidth * 0.7,
@@ -74,7 +69,7 @@ class LoginPageView extends GetView<LoginController> {
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
                         onTap: () {
-                          // Handle forget password tap
+
                         },
                         child: const Text(
                           "Forget password ?",
@@ -92,6 +87,8 @@ class LoginPageView extends GetView<LoginController> {
                 SizedBox(height: screenWidth * 0.1),
                 buildElevatedButton("Log In", Colors.blue),
                 SizedBox(height: screenWidth * 0.06),
+
+                // Registration button
                 buildElevatedButton(
                   "Registration",
                   Colors.white,
@@ -101,6 +98,54 @@ class LoginPageView extends GetView<LoginController> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildElevatedButton(String text, Color backgroundColor,
+      {Color textColor = Colors.white,
+      Color borderColor = Colors.transparent}) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: controller.isLoading.value
+            ? null
+            : () => controller.isAccountCredentialsCorrect(),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(color: borderColor),
+            ),
+          ),
+          fixedSize: MaterialStateProperty.all<Size>(
+            const Size(double.infinity, 50),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            text.toString() == "Log In"
+                ? Obx(() {
+                    return controller.isLoading.value
+                        ? CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : SizedBox.shrink();
+                  })
+                : Container(),
+            SizedBox(width: 10),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -165,40 +210,5 @@ class LoginPageView extends GetView<LoginController> {
         ),
       ],
     );
-  }
-
-  Widget buildElevatedButton(String text, Color backgroundColor,
-      {Color textColor = Colors.white,
-      Color borderColor = Colors.transparent}) {
-    return SizedBox(
-        width: double.infinity,
-        child: Obx(
-          () => ElevatedButton(
-            onPressed: controller.isLoading.value
-                ? null
-                : () => controller.isAccountCredentialsCorrect(),
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(backgroundColor),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  side: BorderSide(color: borderColor),
-                ),
-              ),
-              fixedSize: MaterialStateProperty.all<Size>(
-                const Size(double.infinity, 50),
-              ),
-            ),
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: textColor,
-              ),
-            ),
-          ),
-        ));
   }
 }

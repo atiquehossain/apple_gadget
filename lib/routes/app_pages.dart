@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 
 import '../buinding/GetOpenTrades/GetOpenTrades_binding.dart';
-import '../buinding/LastFourDigit_binding.dart';
+import '../buinding/lastfourDigit/LastFourDigit_binding.dart';
 import '../buinding/accountInfo/accountInfo_binding.dart';
-import '../buinding/home_binding.dart';
-import '../buinding/login_binding.dart';
-import '../buinding/splash_binding.dart';
-import '../controllers/LastFourDigitController.dart';
+import '../buinding/home/home_binding.dart';
+import '../buinding/login/login_binding.dart';
+import '../buinding/splash/splash_binding.dart';
 import '../views/GetOpenTrades/GetOpenTradesView.dart';
 import '../views/LastFourDigit/LastFourDigitView.dart';
 import '../views/accountInfo/AccountInfoPage.dart';

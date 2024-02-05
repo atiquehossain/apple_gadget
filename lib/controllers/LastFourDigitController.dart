@@ -17,17 +17,19 @@ class LastFourDigitController extends GetxController {
 
   final getStorage = GetStorage();
 
-  int? loginAsInt;
+  var loginAsInt;
   String? requiresAuthToken;
 
   void onInit() {
     super.onInit();
     requiresAuthToken = getStorage.read('requiresAuthToken');
+    loginAsInt = getStorage.read('login');
+
     fetchLastFourDigit();
   }
 
   Future<void> fetchLastFourDigit() async {
-    final requestBody = '{"login": 2088888, "token": "${requiresAuthToken}"}';
+    final requestBody = '{"login": ${loginAsInt}, "token": "${requiresAuthToken}"}';
     print("token:  "+requiresAuthToken.toString());
 
     try {
