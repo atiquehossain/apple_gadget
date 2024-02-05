@@ -5,18 +5,15 @@ import 'package:get_storage/get_storage.dart';
 
 import '../../services/ApiConstants.dart';
 
-class AccountController extends GetxController {
-  var accountInfo = {}.obs;
+class LastFourDigitController extends GetxController {
+  var lastFourDigit = {}.obs;
 
   final _client = GetConnect();
   var base_url = ApiConstants.baseUrl;
   var isPasswordVisible = true.obs;
 
-  var endpoint = "GetAccountInformation";
+  var endpoint = "GetLastFourNumbersPhone";
   var error = ''.obs;
-
-
-
 
   final getStorage = GetStorage();
 
@@ -25,41 +22,36 @@ class AccountController extends GetxController {
 
   void onInit() {
     super.onInit();
-    //loginAsInt = getStorage.read('login');
     requiresAuthToken = getStorage.read('requiresAuthToken');
-   // loginAsInt = getStorage.read('login');
-
-
-
-    fetchAccountInformation();
+    fetchLastFourDigit();
   }
 
-  Future<void> fetchAccountInformation() async {
+  Future<void> fetchLastFourDigit() async {
     final requestBody = '{"login": 2088888, "token": "${requiresAuthToken}"}';
+    print("token:  "+requiresAuthToken.toString());
 
     try {
-
-
-      final response = await _client.post(
-        base_url+endpoint,  requestBody);
+      final response = await _client.post(base_url + endpoint, requestBody);
 
       print("Response StatusCode: ${response.statusCode}");
       print("Response Body: ${response.body}");
 
       if (response.statusCode == 200) {
-        accountInfo.value = response.body;
-        print("Account Information loaded successfully");
+        final match = RegExp(r'\*+(\d+)').firstMatch(response.body);
+
+        if (match != null) {
+          final actualData = match.group(1);
+
+          lastFourDigit.value = {'lastFourDigit': actualData};
+        } else {
+          throw Exception("Failed to extract actual data from the response");
+        }
       } else {
         throw Exception("Failed to load account information");
       }
     } catch (e) {
-      // Log any exceptions
-      error.value = 'Failed to connect to server';
+      error.value = 'Failed to connect to the server';
       print("Exception: $e");
     }
   }
-
-
 }
-
-

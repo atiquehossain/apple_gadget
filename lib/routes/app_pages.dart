@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
 
+import '../buinding/LastFourDigit_binding.dart';
 import '../buinding/accountInfo/accountInfo_binding.dart';
 import '../buinding/home_binding.dart';
 import '../buinding/login_binding.dart';
 import '../buinding/splash_binding.dart';
+import '../controllers/LastFourDigitController.dart';
+import '../views/LastFourDigit/LastFourDigitView.dart';
 import '../views/accountInfo/AccountInfoPage.dart';
 import '../views/authentication/LoginPageView.dart';
 import '../views/home/home_view.dart';
@@ -37,6 +40,11 @@ class AppPages {
       name: _Paths.ACCOUNTINFO,
       page: () => const AccountInfoPage(),
       binding: AccountInfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.LASTFOURDIGIT,
+      page: () =>  LastFourDigitView(),
+      binding: LastFourDigit_binding() ,
     ),
   ];
 }

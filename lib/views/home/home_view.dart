@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
              controller.accountInfoPage();
             }),
             buildButton("Get Last Four Numbers Phone", () {
-              // Implement action for GetLastFourNumbersPhone
+              controller.lastFourDigitPage();
             }),
             buildButton("Get Open Trades", () {
               // Implement action for GetOpenTrades

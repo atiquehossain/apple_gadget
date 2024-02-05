@@ -16,6 +16,11 @@ class HomeController extends GetxController {
     Get.offAllNamed(Routes.ACCOUNTINFO);
   }
 
+  lastFourDigitPage() {
+    Get.offAllNamed(Routes.LASTFOURDIGIT);
+  }
+
+
   @override
   void onReady() {
     super.onReady();
