@@ -1,3 +1,4 @@
+import 'package:apple_gadget/localization/Languages.dart';
 import 'package:apple_gadget/routes/app_pages.dart';
 import 'package:apple_gadget/themes/Themes.dart';
 import 'package:apple_gadget/views/authentication/LoginPageView.dart';
@@ -23,11 +24,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      //themes
       theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
       themeMode: getThemeMode(themeController.theme),
+      //routes
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      //localization
+      locale: Locale('en','US'),
+      //locale: _getLocale(),
+      fallbackLocale: Locale('en','US'),
+      translations: Languages(),
     );
   }
 
@@ -46,5 +54,23 @@ class MyApp extends StatelessWidget {
     }
 
     return themeMode;
+  }
+
+
+
+  Locale _getLocale() {
+    final storedLocale = GetStorage().read('locale');
+    if (storedLocale != null) {
+      return Locale(storedLocale['languageCode'], storedLocale['countryCode']);
+    } else {
+      return Locale('en', 'US'); // Default to English if no saved locale found
+    }
+  }
+  void _changeLanguage(Locale locale) {
+    Get.updateLocale(locale);
+    GetStorage().write('locale', {
+      'languageCode': locale.languageCode,
+      'countryCode': locale.countryCode,
+    });
   }
 }

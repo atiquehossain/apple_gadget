@@ -19,8 +19,22 @@ class LoginPageView extends GetView<LoginController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Row(
+                  children: [
+                    OutlinedButton(
+                        onPressed: () {
+                          Get.updateLocale(Locale('en', 'US'));
+                        },
+                        child: Text("English")),
+                    OutlinedButton(
+                        onPressed: () {
+                          Get.updateLocale(Locale('bn', 'BD'));
+                        },
+                        child: Text("Bangla")),
+                  ],
+                ),
                 Text(
-                  "Log In",
+                  "login".tr,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -68,9 +82,7 @@ class LoginPageView extends GetView<LoginController> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
-                        onTap: () {
-
-                        },
+                        onTap: () {},
                         child: const Text(
                           "Forget password ?",
                           style: TextStyle(
